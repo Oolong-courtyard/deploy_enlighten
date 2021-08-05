@@ -7,7 +7,7 @@ services:
       - ./blog_backend/logs:/code/logs
     ports:
       - "8000:8000"
-    command:  python manage.py runserver
+    command:  python manage.py runserver --port 8000
 
   blog_nginx:
     image: nginx
