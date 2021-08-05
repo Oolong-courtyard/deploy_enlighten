@@ -7,7 +7,7 @@ services:
       - ./blog_backend/logs:/code/logs
     ports:
       - "8000:8000"
-    command:  gunicorn boluomi.wsgi:application --bind 0.0.0.0:8000 --workers 2
+    command:  python manage.py runserver
 
   blog_nginx:
     image: nginx
