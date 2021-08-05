@@ -2,27 +2,31 @@ version: "3.3"
 
 services:
   blog_backend:
-    image: liuzhenghuan/enlighten_backend:dev_20210803
+    image: liuzhenghuan/enlighten_backend:dev_20210805
     volumes:
       - ./blog_backend/logs:/code/logs
     ports:
       - "8000:8000"
 
   blog_nginx:
-    images: nginx
+    image: nginx
     depends_on:
       - blog_backend
-      - mysql
     volumes:
-      ./data/blog_nginx/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      ./data/blog_nginx/dist/:/usr/share/nginx/html/
+      - ./data/blog_nginx/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./data/blog_nginx/dist/:/web/dist/
     ports:
       - "80:80"
 
-  mysql:
-    image: mysql:8.0.21
-    volumes:
-      - ./data/mysql:/var/lib/mysql
+#  postgresql:
+#    image: postgresql
+#    volumes:
+#      - ./data/mysql:/var/lib/mysql
+#    environment:
+#      MYSQL_ROOT_PASSWORD: mysql
+#      MYSQL_USER: root
+#      MYSQL_PASSWORD: mysql
+#      TZ: Asia/Shanghai
 
   redis:
     image: redis
